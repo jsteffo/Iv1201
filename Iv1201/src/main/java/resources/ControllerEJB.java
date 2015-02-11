@@ -15,7 +15,7 @@ public class ControllerEJB {
 	private GeneralDAO dao;
 	
 	public void addApplicant(ApplicantDTO dto){
-		//Call AddApplicant
+		dao.insertPerson(dto);
 		//Call addRole
 		//Call etc etc...
 	}
