@@ -55,8 +55,10 @@ public class GeneralDAO {
 	 */
 	public BigInteger getPersonIdFromSsn(String ssn){
 		String sql = "SELECT p FROM Person p where p.ssn = :personSsn";
-		List l = em.createQuery(sql).setParameter("personSsn", ssn).getResultList();
-		return (BigInteger) l.get(0);
+		Person p = (Person) em.createQuery(sql).setParameter("personSsn", ssn).getSingleResult();
+		return new BigInteger(p.getSsn());
+		
+		
 	}
 	
 	//insertRole
