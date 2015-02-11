@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -17,6 +19,7 @@ public class CompetenceProfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="competence_profile_id")
 	private String competenceProfileId;
 

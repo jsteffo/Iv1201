@@ -105,6 +105,8 @@ public class ApplicationBean {
 		ApplicantDTO dto = new ApplicantDTO();
 		dto.setFirstName(firstName);
 		dto.setLastName(lastName);
+		dto.setFromDate(LocalDate.of(2014, 1, 1));
+		dto.setToDate(LocalDate.of(2015, 1, 1));
 		controller.addApplicant(dto);
 	}
 	
