@@ -167,9 +167,7 @@
 -->
       <profile>
          <id>wildfly-managed-arquillian</id>
-         <activation>
-            <activeByDefault>true</activeByDefault>
-         </activation>
+
          <properties>
             <serverProfile>standalone-full.xml</serverProfile>
             <serverRoot>${project.build.directory}/wildfly-${version.wildfly}</serverRoot>
