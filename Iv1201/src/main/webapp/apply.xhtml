@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+<head>
+    <title>Work here</title>
+</head>
+
+<body>
+<h:form>
+<h:outputText value="First name"></h:outputText>
+<h:inputText value="#{applicationBean.firstName}"></h:inputText>
+<h:outputText value="Last name"></h:outputText>
+<h:inputText value="#{applicationBean.lastName}"></h:inputText>
+<h:commandButton value="submit" action="#{applicationBean.submit}"></h:commandButton>
+</h:form>
+</body>
+</html>

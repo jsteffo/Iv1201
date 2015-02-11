@@ -1,10 +1,24 @@
-package dto;
+package view;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class ApplicantDTO {
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 
+import resources.ControllerEJB;
+import dto.ApplicantDTO;
+import dto.CompetenceDTO;
+
+@ManagedBean
+@SessionScoped
+public class ApplicationBean {
+
+	
+	@Inject
+	ControllerEJB controller;
+	
 	private String firstName;
 	private String lastName;
 	private String ssn;
@@ -13,26 +27,12 @@ public class ApplicantDTO {
 	private String userName;
 	private LocalDate fromDate;
 	private LocalDate toDate;
-	private List<CompetenceDTO> competence;
+	//Vill väl egentligen ha nedanstående i lista?
+	private String competenceName;
+	private String competenceDuration;
+	private CompetenceDTO competence;
 	
-	public ApplicantDTO(){
-		
-	}
 	
-	public ApplicantDTO(String firstName, String lastName, String ssn,
-			String email, String password, String userName, LocalDate fromDate,
-			LocalDate toDate, List<CompetenceDTO> competence) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.ssn = ssn;
-		this.email = email;
-		this.password = password;
-		this.userName = userName;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-		this.competence = competence;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
@@ -81,11 +81,31 @@ public class ApplicantDTO {
 	public void setToDate(LocalDate toDate) {
 		this.toDate = toDate;
 	}
-	public List<CompetenceDTO> getCompetence() {
+	public String getCompetenceName() {
+		return competenceName;
+	}
+	public void setCompetenceName(String competenceName) {
+		this.competenceName = competenceName;
+	}
+	public String getCompetenceDuration() {
+		return competenceDuration;
+	}
+	public void setCompetenceDuration(String competenceDuration) {
+		this.competenceDuration = competenceDuration;
+	}
+	public CompetenceDTO getCompetence() {
 		return competence;
 	}
-	public void setCompetence(List<CompetenceDTO> competence) {
+	public void setCompetence(CompetenceDTO competence) {
 		this.competence = competence;
+	}
+	
+	
+	public void submit(){
+		ApplicantDTO dto = new ApplicantDTO();
+		dto.setFirstName(firstName);
+		dto.setLastName(lastName);
+		controller.addApplicant(dto);
 	}
 	
 }
