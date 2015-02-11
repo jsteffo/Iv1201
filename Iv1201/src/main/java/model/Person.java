@@ -15,7 +15,9 @@ import java.math.BigInteger;
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="person_id")
 	private String personId;
 
