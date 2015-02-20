@@ -1,6 +1,7 @@
 package view;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -9,7 +10,9 @@ import javax.inject.Inject;
 
 import resources.ControllerEJB;
 import dto.ApplicantDTO;
+import dto.AvailabilityDTO;
 import dto.CompetenceDTO;
+import dto.PersonDTO;
 
 @ManagedBean
 @SessionScoped
@@ -102,13 +105,31 @@ public class ApplicationBean {
 	
 	
 	public void submit(){
-		ApplicantDTO dto = new ApplicantDTO();
-		dto.setFirstName(firstName);
-		dto.setLastName(lastName);
-		dto.setSsn(ssn);
-		dto.setFromDate(LocalDate.of(2014, 1, 1));
-		dto.setToDate(LocalDate.of(2015, 1, 1));
-		controller.addApplicant(dto);
+		//Add just a bunch of data. Rest of person data is null for now
+		PersonDTO personDTO = new PersonDTO();
+		personDTO.setFirstName(firstName);
+		personDTO.setLastName(lastName);
+		personDTO.setSsn(ssn);
+		
+		//Add competences. Make sure supplied names exist in DB
+		List <CompetenceDTO> competenceList = new ArrayList<CompetenceDTO>();
+		CompetenceDTO cDTO = new CompetenceDTO("kock", 5);
+		competenceList.add(cDTO);
+		cDTO = new CompetenceDTO("dykare", 3);
+		competenceList.add(cDTO);
+		
+		
+		//Add availabilities. For person
+		List<AvailabilityDTO> availabilityList= new ArrayList<AvailabilityDTO>();
+		AvailabilityDTO aDTO  = new AvailabilityDTO();
+		aDTO.setFromDate(LocalDate.of(2014, 1, 1));
+		aDTO.setToDate(LocalDate.of(2014, 3, 3));
+		availabilityList.add(aDTO);
+		aDTO  = new AvailabilityDTO();
+		aDTO.setFromDate(LocalDate.of(2015, 2, 2));
+		aDTO.setToDate(LocalDate.of(2015, 4, 4));
+		availabilityList.add(aDTO);
+		controller.addApplication(personDTO, availabilityList, competenceList);
 	}
 	
 }
