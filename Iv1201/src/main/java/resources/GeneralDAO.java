@@ -26,6 +26,7 @@ public class GeneralDAO {
 	EntityManager em;
 
 	/**
+	 * NOT TO BE USED AT ALL. Keep it temporarily for everyone to compared old vs new way of dealing with inserts.
 	 * Insert a new Person in the Table person. 
 	 * @param dto - Information to be inserted
 	 */
@@ -36,12 +37,16 @@ public class GeneralDAO {
 		p.setSurname(dto.getLastName());
 		p.setEmail(dto.getEmail());
 		p.setPassword(dto.getPassword());
-	
 		p.setSsn(dto.getSsn());
 		p.setUsername(dto.getUserName());
 		em.persist(p);
 	}
 	
+	/**
+	 * Insert a Person into the DB
+	 * @param dto - The data of the Person to be inserted
+	 * @return - A reference to the newly inserted Person
+	 */
 	public Person insertPerson(PersonDTO dto){
 		
 		Person p = new Person();
@@ -55,6 +60,11 @@ public class GeneralDAO {
 		return p;
 	}
 	
+	/**
+	 * Insert Availability of a Person into the DB
+	 * @param dto - The availability data to be inserted
+	 * @param p - The Person to which the availability data is to be associated with
+	 */
 	public void insertAvailability(List<AvailabilityDTO> dto, Person p) {
 		
 		for(AvailabilityDTO aDto : dto){
@@ -66,6 +76,11 @@ public class GeneralDAO {
 		}
 	}
 	
+	/**
+	 * Insert Competence of a Person into the DB
+	 * @param dto - The competence data to be inserted
+	 * @param p - The Person to which the competence Data is to be associated with
+	 */
 	public void insertCompetence(List<CompetenceDTO> dto, Person p) {
 		for(CompetenceDTO cDto : dto) {
 			CompetenceProfile cProfile = new CompetenceProfile();
@@ -75,7 +90,11 @@ public class GeneralDAO {
 			em.persist(cProfile);	
 		}
 	}
-	
+	/**
+	 * Get the Competence entity object with the specified competence name
+	 * @param competenceName - name of the competence in question
+	 * @return - The entity with specified competenceName
+	 */
 	public Competence getCompetence(String competenceName) {
 		String sql = "SELECT c from Competence c where c.name = :competenceName";
 		return (Competence) em.createQuery(sql).setParameter("competenceName", competenceName).getSingleResult();

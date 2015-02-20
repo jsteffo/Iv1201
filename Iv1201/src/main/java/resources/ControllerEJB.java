@@ -24,6 +24,13 @@ public class ControllerEJB {
 //		//Call etc etc...
 //	}
 	
+	/**
+	 * Add an applicant into the Database. An Applicant is a Person with associated data about its competence
+	 * and availability.
+	 * @param persDTO - Data describing Person
+	 * @param availDTO - Data describing the availability of Person
+	 * @param compDTO - Data describing the competence of Person
+	 */
 	public void addApplication(PersonDTO persDTO, List<AvailabilityDTO> availDTO, List<CompetenceDTO> compDTO) {
 		Person p = dao.insertPerson(persDTO);
 		dao.insertAvailability(availDTO, p);
