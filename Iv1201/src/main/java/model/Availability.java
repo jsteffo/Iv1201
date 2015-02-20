@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.Date;
-import java.math.BigInteger;
 
 
 /**
@@ -19,29 +18,31 @@ public class Availability implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="availability_id")
-	private String availabilityId;
+	private long availabilityId;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="from_date")
 	private Date fromDate;
 
-	@Column(name="person_id")
-	private BigInteger personId;
-
 	@Temporal(TemporalType.DATE)
 	@Column(name="to_date")
 	private Date toDate;
 
+	//bi-directional many-to-one association to Person
+	@ManyToOne
+	@JoinColumn(name="person_id")
+	private Person person;
+
 	public Availability() {
 	}
 
-	public String getAvailabilityId() {
+	public long getAvailabilityId() {
 		return this.availabilityId;
 	}
 
-	public void setAvailabilityId(String availabilityId) {
+	public void setAvailabilityId(long availabilityId) {
 		this.availabilityId = availabilityId;
 	}
 
@@ -53,20 +54,20 @@ public class Availability implements Serializable {
 		this.fromDate = fromDate;
 	}
 
-	public BigInteger getPersonId() {
-		return this.personId;
-	}
-
-	public void setPersonId(BigInteger personId) {
-		this.personId = personId;
-	}
-
 	public Date getToDate() {
 		return this.toDate;
 	}
 
 	public void setToDate(Date toDate) {
 		this.toDate = toDate;
+	}
+
+	public Person getPerson() {
+		return this.person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 }

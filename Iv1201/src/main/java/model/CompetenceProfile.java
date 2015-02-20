@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 
 /**
@@ -19,44 +18,32 @@ public class CompetenceProfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="competence_profile_id")
-	private String competenceProfileId;
-
-	@Column(name="competence_id")
-	private BigInteger competenceId;
-
-	@Column(name="person_id")
-	private BigInteger personId;
+	private long competenceProfileId;
 
 	@Column(name="years_of_experience")
 	private BigDecimal yearsOfExperience;
 
+	//bi-directional many-to-one association to Person
+	@ManyToOne
+	@JoinColumn(name="person_id")
+	private Person person;
+
+	//bi-directional many-to-one association to Competence
+	@ManyToOne
+	@JoinColumn(name="competence_id")
+	private Competence competence;
+
 	public CompetenceProfile() {
 	}
 
-	public String getCompetenceProfileId() {
+	public long getCompetenceProfileId() {
 		return this.competenceProfileId;
 	}
 
-	public void setCompetenceProfileId(String competenceProfileId) {
+	public void setCompetenceProfileId(long competenceProfileId) {
 		this.competenceProfileId = competenceProfileId;
-	}
-
-	public BigInteger getCompetenceId() {
-		return this.competenceId;
-	}
-
-	public void setCompetenceId(BigInteger competenceId) {
-		this.competenceId = competenceId;
-	}
-
-	public BigInteger getPersonId() {
-		return this.personId;
-	}
-
-	public void setPersonId(BigInteger personId) {
-		this.personId = personId;
 	}
 
 	public BigDecimal getYearsOfExperience() {
@@ -65,6 +52,22 @@ public class CompetenceProfile implements Serializable {
 
 	public void setYearsOfExperience(BigDecimal yearsOfExperience) {
 		this.yearsOfExperience = yearsOfExperience;
+	}
+
+	public Person getPerson() {
+		return this.person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public Competence getCompetence() {
+		return this.competence;
+	}
+
+	public void setCompetence(Competence competence) {
+		this.competence = competence;
 	}
 
 }
