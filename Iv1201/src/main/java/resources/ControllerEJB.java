@@ -34,7 +34,7 @@ public class ControllerEJB {
 	public void addApplication(PersonDTO persDTO, List<AvailabilityDTO> availDTO, List<CompetenceDTO> compDTO) {
 		Person p = dao.insertPerson(persDTO);
 		dao.insertAvailability(availDTO, p);
-		dao.insertCompetence(compDTO, p);
+		dao.insertCompetenceProfile(compDTO, p);
 		
 	}
 	//public void doSomeOtherStuff

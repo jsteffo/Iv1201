@@ -81,7 +81,7 @@ public class GeneralDAO {
 	 * @param dto - The competence data to be inserted
 	 * @param p - The Person to which the competence Data is to be associated with
 	 */
-	public void insertCompetence(List<CompetenceDTO> dto, Person p) {
+	public void insertCompetenceProfile(List<CompetenceDTO> dto, Person p) {
 		for(CompetenceDTO cDto : dto) {
 			CompetenceProfile cProfile = new CompetenceProfile();
 			cProfile.setPerson(p);
@@ -100,6 +100,7 @@ public class GeneralDAO {
 		return (Competence) em.createQuery(sql).setParameter("competenceName", competenceName).getSingleResult();
 	}
 	
+
 //	/**
 //	 * Insert availability row into database. The availability specified is associated with the person specified in argument
 //	 * @param dto - The dates to be inserted and social security number of person whom dates should be associated with
