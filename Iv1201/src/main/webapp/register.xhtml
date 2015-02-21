@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+         <div class="container">
+             <h:form class="form-signin">
+                 <br/><br/><br/><br/>
+<h2 class="form-signin-heading">Register your account</h2>
+<h:outputText value="First name"></h:outputText>
+<h:inputText class="form-control" value="#{applicationBean.firstName}"></h:inputText>
+<h:outputText value="Last name"></h:outputText>
+<h:inputText class="form-control" value="#{applicationBean.lastName}"></h:inputText>
+<h:outputText value="Social security Number"></h:outputText>
+<h:inputText class="form-control" value="#{applicationBean.ssn}"></h:inputText>
+
+<h:commandButton value="submit" action="#{applicationBean.submit}"></h:commandButton>
+</h:form>
+</div> <!-- /container -->
+    </body>
+</html>
