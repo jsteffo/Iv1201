@@ -42,6 +42,7 @@ public class ApplicantTest
      * Test to see if deployment is working
      * Will always pass
      */
+    
     @Test
     public void testIsDeployed()
     {
@@ -52,6 +53,7 @@ public class ApplicantTest
      * Test to see that the DAO works correctly with the Person Entity
      * Also checks that data is stored correctly
      */
+    
     @Test
     public void testNewPerson()
     {
