@@ -131,5 +131,38 @@ public class ApplicationBean {
 		availabilityList.add(aDTO);
 		controller.addApplication(personDTO, availabilityList, competenceList);
 	}
+ 
+        
+        
+        //will be used with the form for registration part 1
+        public String submitPerson(){
+            /*PersonDTO pDTO = new PersonDTO();
+            pDTO.setFirstName(firstName);
+            pDTO.setLastName(lastName);
+            pDTO.setSsn(ssn);
+            pDTO.setEmail(email);
+            pDTO.setUserName(userName);
+            pDTO.setPassword(password);
+        */
+            return "success";
+        }
+        
+        
+        //will be used with the form for registration part 3
+        public String submitAvailability(){
+            AvailabilityDTO aDTO = new AvailabilityDTO();
+            aDTO.setFromDate(fromDate);
+            aDTO.setToDate(toDate);
+            
+            return "fail";
+        }
+        
+        
+        //will be used with the form for registration part 2
+        public String submitCompetence(){
+            CompetenceDTO cDTO = new CompetenceDTO(competenceName, Integer.parseInt(competenceDuration));
+            
+            return "fail";
+        }
 	
 }

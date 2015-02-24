@@ -41,11 +41,20 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 		</ui:insert>
 	    </div>
  
-	    <div id="content">
-	  	<ui:insert name="content" >
-                    <ui:include src="register.xhtml" />
-	   	</ui:insert>
-	    </div>
+	    <div class="container">
+             <h:form class="form-signin">
+<h4 class="form-signin-heading">Step 3 of 3</h4>
+                 <br/><br/><br/><br/>
+<h2 class="form-signin-heading">Register your periods of availability</h2>
+<h:outputText value="From date"></h:outputText>
+<h:inputText class="form-control" value="#{applicationBean.fromDate}"></h:inputText>
+<h:outputText value="To date"></h:outputText>
+<h:inputText class="form-control" value="#{applicationBean.toDate}"></h:inputText>
+
+<h:commandButton value="submit" action="#"></h:commandButton>
+<a href="#{request.contextPath}/competence.xhtml">BACK</a>
+</h:form>
+</div> <!-- /container -->
  
 	    <div id="footer">
 	    	<ui:insert name="footer" >
