@@ -2,8 +2,12 @@ package resources;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptor;
+import javax.interceptor.Interceptors;
 
+import util.LoggingInterceptor;
 import model.Person;
 import dto.ApplicantDTO;
 import dto.AvailabilityDTO;
@@ -13,6 +17,8 @@ import dto.PersonDTO;
  * The methods to be seen from managed been through dependency injection
  *
  */
+@Stateless
+@Interceptors(LoggingInterceptor.class)
 public class ControllerEJB {
 
 	@Inject

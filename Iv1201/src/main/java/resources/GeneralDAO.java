@@ -7,9 +7,12 @@ import java.math.BigInteger;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptor;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import util.LoggingInterceptor;
 import model.Availability;
 import model.Competence;
 import model.CompetenceProfile;
@@ -20,6 +23,7 @@ import dto.CompetenceDTO;
 import dto.PersonDTO;
 
 @Stateless
+@Interceptors(LoggingInterceptor.class)
 public class GeneralDAO {
 	
 	@PersistenceContext
@@ -82,11 +86,14 @@ public class GeneralDAO {
 	 * @param p - The Person to which the competence Data is to be associated with
 	 */
 	public void insertCompetenceProfile(List<CompetenceDTO> dto, Person p) {
+		
 		for(CompetenceDTO cDto : dto) {
 			CompetenceProfile cProfile = new CompetenceProfile();
 			cProfile.setPerson(p);
 			cProfile.setYearsOfExperience(new BigDecimal(cDto.getYearsOfExperience()));
-			cProfile.setCompetence(getCompetence(cDto.getName()));
+			Competence c = getCompetence(cDto.getName());
+
+			cProfile.setCompetence(c);
 			em.persist(cProfile);	
 		}
 	}
