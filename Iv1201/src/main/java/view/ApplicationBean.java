@@ -3,6 +3,8 @@ package view;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,9 +15,13 @@ import dto.ApplicantDTO;
 import dto.AvailabilityDTO;
 import dto.CompetenceDTO;
 import dto.PersonDTO;
+
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 import model.Competence;
+
+import exception.NoSuchCompetenceException;
+
 
 @ManagedBean
 @SessionScoped
@@ -24,6 +30,9 @@ public class ApplicationBean {
 	
 	@Inject
 	ControllerEJB controller;
+	
+	@Inject
+	Logger logger;
 	
 	private String firstName;
 	private String lastName;
@@ -288,7 +297,12 @@ public class ApplicationBean {
 		aDTO.setFromDate(LocalDate.of(2015, 2, 2));
 		aDTO.setToDate(LocalDate.of(2015, 4, 4));
 		availabilityList.add(aDTO);
-		controller.addApplication(personDTO, availabilityList, competenceList);
+		try {
+			controller.addApplication(personDTO, availabilityList, competenceList);
+		} catch (NoSuchCompetenceException e) {
+			logger.log(Level.WARNING, "Name of competence: " + e.getName(), e);
+			
+		}
 	}
  
         
@@ -346,8 +360,14 @@ public class ApplicationBean {
             pDTO.setEmail(email);
             pDTO.setUserName(userName);
             pDTO.setPassword(password);
-        
-            controller.addApplication(pDTO, availabilityList, competenceList);
+            
+            try {
+			 controller.addApplication(pDTO, availabilityList, competenceList);
+		} catch (NoSuchCompetenceException e) {
+			logger.log(Level.WARNING, "Name of competence: " + e.getName(), e);
+			
+		}
+           
             availabilityList.clear();
             competenceList.clear();
             userName="";

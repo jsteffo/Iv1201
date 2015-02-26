@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,11 +37,11 @@ public class Person implements Serializable {
 
 	//bi-directional many-to-one association to Availability
 	@OneToMany(mappedBy="person")
-	private List<Availability> availabilities;
+	private List<Availability> availabilities = new ArrayList<>();
 
 	//bi-directional many-to-one association to CompetenceProfile
 	@OneToMany(mappedBy="person")
-	private List<CompetenceProfile> competenceProfiles;
+	private List<CompetenceProfile> competenceProfiles = new ArrayList<>();
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne

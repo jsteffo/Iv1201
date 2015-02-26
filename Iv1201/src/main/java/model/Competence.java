@@ -1,7 +1,10 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,7 +27,7 @@ public class Competence implements Serializable {
 
 	//bi-directional many-to-one association to CompetenceProfile
 	@OneToMany(mappedBy="competence")
-	private List<CompetenceProfile> competenceProfiles;
+	private List<CompetenceProfile> competenceProfiles = new ArrayList<>();
 
 	public Competence() {
 	}
