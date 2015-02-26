@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import model.Person;
+import model.Competence;
 import dto.ApplicantDTO;
 import dto.AvailabilityDTO;
 import dto.CompetenceDTO;
@@ -37,5 +38,14 @@ public class ControllerEJB {
 		dao.insertCompetenceProfile(compDTO, p);
 		
 	}
+        
+        
+        /**
+	 * Get all the available competences in the DB from the DAO
+	 * @return - List of CompetenceDTO which will be available
+	 */
+        public List<CompetenceDTO> getAllCompetences(){
+           return dao.getAllCompetences();
+        }
 	//public void doSomeOtherStuff
 }

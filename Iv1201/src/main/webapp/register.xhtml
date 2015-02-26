@@ -11,8 +11,8 @@ xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
          <div class="container">
              <h:form class="form-signin">
-                 <h4 class="form-signin-heading">Step 1 of 3</h4>
-                 <br/><br/><br/><br/>
+                 <h4 class="form-signin-heading">Step <span class="label label-info">1 of 4</span> </h4>
+                 <br/><br/>
 <h2 class="form-signin-heading">Register your account</h2>
 <h:outputText value="First name"></h:outputText>
 <h:inputText class="form-control" value="#{applicationBean.firstName}"></h:inputText>
@@ -26,10 +26,13 @@ xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:inputText class="form-control" value="#{applicationBean.userName}"></h:inputText>
 <h:outputText value="Password"></h:outputText>
 <h:inputSecret class="form-control" value="#{applicationBean.password}"></h:inputSecret>
-<h:commandButton value="submit" action="#{applicationBean.submit}"></h:commandButton>
-<h:commandButton value="TEST" action="#{applicationBean.submitPerson()}"></h:commandButton>
+
+<h:commandButton value="Save" action="#{applicationBean.savePerson()}"></h:commandButton>
 </h:form>
-             <a href="#{request.contextPath}/competence.xhtml">NEXT</a>
+             <br/><br/>
+             
 </div> <!-- /container -->
+<br/><br/>
+<br/><br/>
     </body>
 </html>

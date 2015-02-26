@@ -42,17 +42,72 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 	    </div>
  
 	    <div class="container">
-             <h:form class="form-signin">
-<h4 class="form-signin-heading">Step 3 of 3</h4>
-                 <br/><br/><br/><br/>
+             
+                
+                 
+                 
+<h4 class="form-signin-heading">Step <span class="label label-info">3 of 4</span> </h4>
+                 <br/><br/>
+                 <h2 class="form-signin-heading">Your listed availabilities</h2>
+   <table class="table table-hover">
+<tr>
+<th class="order-table-header">From</th>
+<th class="order-table-header">To</th>
+
+</tr>
+       <ui:repeat var="a" value="#{applicationBean.availabilityList}" >
+<tr>
+    <td>#{a.fromDate}</td>
+    <td>#{a.toDate}</td>
+
+</tr>
+</ui:repeat>
+</table>
+          <h:form class="navbar-form navbar-right">
+<h:commandButton class="btn btn-danger" value="Clear" action="#{applicationBean.clearAvailabilities()}"/>
+</h:form>       
+                 <h:form class="form-signin">
 <h2 class="form-signin-heading">Register your periods of availability</h2>
 <h:outputText value="From date"></h:outputText>
-<h:inputText class="form-control" value="#{applicationBean.fromDate}"></h:inputText>
-<h:outputText value="To date"></h:outputText>
-<h:inputText class="form-control" value="#{applicationBean.toDate}"></h:inputText>
+<h:selectOneMenu label="Competences:" value="#{applicationBean.fromDateYear}">
+                     
+                     <f:selectItems value="#{applicationBean.years}" />
+                       	 			
+                </h:selectOneMenu>
+                  <h:selectOneMenu label="Competences:" value="#{applicationBean.fromDateMonth}">
+                     
+                     <f:selectItems value="#{applicationBean.months}" />
+                       	 			
+                </h:selectOneMenu>
+                  <h:selectOneMenu label="Competences:" value="#{applicationBean.fromDateDay}">
+                     
+                     <f:selectItems value="#{applicationBean.days}" />
+                       	 			
+                </h:selectOneMenu>
+                 
 
-<h:commandButton value="submit" action="#"></h:commandButton>
+<br></br><br></br>
+<h:outputText value="To date"></h:outputText>
+<h:selectOneMenu label="Competences:" value="#{applicationBean.toDateYear}">
+                     
+                     <f:selectItems value="#{applicationBean.years}" />
+                       	 			
+                </h:selectOneMenu>
+                  <h:selectOneMenu label="Competences:" value="#{applicationBean.toDateMonth}">
+                     
+                     <f:selectItems value="#{applicationBean.months}" />
+                       	 			
+                </h:selectOneMenu>
+                  <h:selectOneMenu label="Competences:" value="#{applicationBean.toDateDay}">
+                     
+                     <f:selectItems value="#{applicationBean.days}" />
+                       	 			
+                </h:selectOneMenu>
+<br></br><br></br>
+<h:commandButton class="btn btn-success" value="Add availability" action="#{applicationBean.addAvailability()}"></h:commandButton>
+<br></br><br></br>
 <a href="#{request.contextPath}/competence.xhtml">BACK</a>
+<a href="#{request.contextPath}/finalApplicationView.xhtml">Final step</a>
 </h:form>
 </div> <!-- /container -->
  

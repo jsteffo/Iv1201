@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
 import model.Availability;
 import model.Competence;
 import model.CompetenceProfile;
@@ -18,6 +19,10 @@ import dto.ApplicantDTO;
 import dto.AvailabilityDTO;
 import dto.CompetenceDTO;
 import dto.PersonDTO;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class GeneralDAO {
@@ -100,6 +105,24 @@ public class GeneralDAO {
 		return (Competence) em.createQuery(sql).setParameter("competenceName", competenceName).getSingleResult();
 	}
 	
+        
+        /**
+	 * Get all the available competences in the DB
+	 * @return - List of CompetenceDTO which will be available
+	 */
+        public List<CompetenceDTO> getAllCompetences(){
+            
+            TypedQuery<Competence> getAll = em.createNamedQuery("Competence.findAll", Competence.class);
+            List<Competence> resultQuery = getAll.getResultList();
+            List<CompetenceDTO> finalResultList = new ArrayList<CompetenceDTO>();
+            for (int i = 0; i < resultQuery.size(); i++) {
+                CompetenceDTO resObject = new CompetenceDTO();
+                resObject.setName(resultQuery.get(i).getName());
+                finalResultList.add(resObject);
+            }
+
+            return finalResultList;
+        }
 
 //	/**
 //	 * Insert availability row into database. The availability specified is associated with the person specified in argument

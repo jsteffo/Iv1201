@@ -9,6 +9,10 @@ public class CompetenceDTO {
 		this.name = name;
 		this.yearsOfExperience = yearsOfExperience;
 	}
+        public CompetenceDTO() {
+		super();
+	}
+        
 	public String getName() {
 		return name;
 	}
