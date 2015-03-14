@@ -33,7 +33,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
  
     <h:body>
  
-	<div id="page">d
+	<div id="page">
  
 	    <div id="header">
 		<ui:insert name="header" >
@@ -42,11 +42,22 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 	    </div>
  
 	    <div class="container">
+  <button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("listedCompetence").rows.length;
+    document.getElementById("demo").innerHTML = "Found " + x + " tr elements in the table.";
+}
+</script>
                 
+                <h:outputScript library="js" name="validation.js" target="head" />
    
 <h4 class="form-signin-heading">Step <span class="label label-info">2 of 4</span> </h4>                
                  <h2 class="form-signin-heading">Your listed competences</h2>
-   <table class="table table-hover">
+                 <table class="table table-hover" id="listedCompetence">
 <tr>
 <th class="order-table-header">Skill</th>
 <th class="order-table-header">Years of experience</th>
@@ -68,7 +79,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
                  
                  
                  
-             <h:form class="form-signin">
+                 <h:form class="form-signin" id="competenceForm">
 <h2 class="form-signin-heading">Register your competences</h2>
                  <br/><br/>
                  
@@ -79,14 +90,20 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
                        	 			
                 </h:selectOneMenu>	
                   <br/><br/>
-<h:outputText value="Duration:"></h:outputText>
-<h:inputText class="form-control" value="#{applicationBean.competenceDuration}"></h:inputText>
+                  <h:outputLabel for="competenceDuration" value="Duration:"></h:outputLabel>
+                <h:inputText class="form-control" id="competenceDuration" required="true" value="#{applicationBean.competenceDuration}"><f:validateLongRange minimum="1" maximum="80" /></h:inputText>
 
-<h:commandButton class="btn btn-success" value="Add competence" action="#{applicationBean.addCompetence()}"></h:commandButton>
-</h:form>
+                <h:commandButton class="btn btn-success" value="Add competence" action="#{applicationBean.addCompetence()}"></h:commandButton>
+                <br/>
+                <h:message for="competenceDuration" style="color:red"/>
+                <br/>
+             </h:form>
                  <br/><br/>
                 <a href="#{request.contextPath}/standardTemplate.xhtml">BACK</a>
-                <a href="#{request.contextPath}/availability.xhtml">NEXT</a>
+                
+                <h:form>
+                    <h:commandButton class="btn btn-success" value="Next" onclick="return validateCompetence()" action="#{applicationBean.saveCompetence()}" ></h:commandButton>
+                </h:form>
 </div> <!-- /container -->
                  <br/><br/>
                 

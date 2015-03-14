@@ -18,6 +18,19 @@
 		<to-view-id>error.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
+     <navigation-rule>
+	<from-view-id>standardTemplate.xhtml</from-view-id>
+	<navigation-case>
+		<from-action>#{applicationBean.saveCompetence()}</from-action>
+		<from-outcome>competenceSuccess</from-outcome>
+		<to-view-id>availability.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{applicationBean.saveCompetence()}</from-action>
+		<from-outcome>competenceFail</from-outcome>
+		<to-view-id>competence.xhtml</to-view-id>
+	</navigation-case>
+    </navigation-rule>
     <navigation-rule>
 	<from-view-id>finalApplicationView.xhtml</from-view-id>
 	<navigation-case>
@@ -31,6 +44,31 @@
 		<to-view-id>error.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
-    
+    <navigation-rule>
+	<from-view-id>competence.xhtml</from-view-id>
+	<navigation-case>
+		<from-action>#{applicationBean.saveCompetence()}</from-action>
+		<from-outcome>competenceSuccess</from-outcome>
+		<to-view-id>availability.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{applicationBean.saveCompetence()}</from-action>
+		<from-outcome>competenceFail</from-outcome>
+		<to-view-id>competence.xhtml</to-view-id>
+	</navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+	<from-view-id>availability.xhtml</from-view-id>
+	<navigation-case>
+		<from-action>#{applicationBean.saveAvailability()}</from-action>
+		<from-outcome>availabilitySuccess</from-outcome>
+		<to-view-id>finalApplicationView.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{applicationBean.saveAvailability()}</from-action>
+		<from-outcome>availabilityFail</from-outcome>
+		<to-view-id>availability.xhtml</to-view-id>
+	</navigation-case>
+    </navigation-rule>
     
 </faces-config>

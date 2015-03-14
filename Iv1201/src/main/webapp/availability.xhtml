@@ -44,12 +44,12 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 	    <div class="container">
              
                 
-                 
+                 <h:outputScript library="js" name="validation.js" target="head" />
                  
 <h4 class="form-signin-heading">Step <span class="label label-info">3 of 4</span> </h4>
                  <br/><br/>
                  <h2 class="form-signin-heading">Your listed availabilities</h2>
-   <table class="table table-hover">
+                 <table class="table table-hover" id="listedAvailability">
 <tr>
 <th class="order-table-header">From</th>
 <th class="order-table-header">To</th>
@@ -109,6 +109,10 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 <a href="#{request.contextPath}/competence.xhtml">BACK</a>
 <a href="#{request.contextPath}/finalApplicationView.xhtml">Final step</a>
 </h:form>
+                 <h:form>
+                    <h:commandButton class="btn btn-success" value="Next" onclick="return validateAvailability()" action="#{applicationBean.saveAvailability()}" ></h:commandButton>
+                </h:form>
+                 
 </div> <!-- /container -->
  
 	    <div id="footer">

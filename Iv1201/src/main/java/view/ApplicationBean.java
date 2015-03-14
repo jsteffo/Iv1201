@@ -240,7 +240,7 @@ public class ApplicationBean {
         }
         
         
-        
+        //will clear list of compentences
         public void clearCompetences(){
             competenceList.clear();
         }
@@ -258,10 +258,12 @@ public class ApplicationBean {
             availabilityList.add(aDTO);
           
         }
-        
+        //Will empty the list of available periods
         public void clearAvailabilities(){
            availabilityList.clear();
         }
+        
+        //will convert competences from DB so that the list of names may be used in a dropdown list
         public List<String> getDropdownCompetences() {
         dropdownCompetences.clear();
         for (int i = 0; i < existingCompetences.size(); i++) {
@@ -307,14 +309,33 @@ public class ApplicationBean {
  
         
         
-        //will be used with the form for registration part 1
+        //will be used with the form for registration part 1 in order to move to next step
         public String savePerson(){
-          
-        
-            //add validation before reroute to next step
+            //add validation being made by tag library + js form validation
+            //This is mainly to use navigational rules
             return "success";
         }
         
+        //will be used with the form for registration part 2 in order to move to next step
+        public String saveCompetence(){
+            if (competenceList.size() < 1) {
+                return "competenceFail";
+                
+            }
+            return "competenceSuccess";
+        }
+        
+        
+        //will be used with the form for registration part 3 in order to move to next step
+        
+        public String saveAvailability(){
+            if (availabilityList.size() < 1) {
+                return "availabilityFail";
+            }
+            
+            return "availabilitySuccess";
+        }
+                
         
         //will be used with the form for registration part 3
         public String submitAvailability(){
