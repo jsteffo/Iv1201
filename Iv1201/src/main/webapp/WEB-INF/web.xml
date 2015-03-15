@@ -27,6 +27,6 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
   <welcome-file-list>
-    <welcome-file>faces/standardTemplate.jsf</welcome-file>
+    <welcome-file>faces/home.jsf</welcome-file>
 </welcome-file-list>
 </web-app>

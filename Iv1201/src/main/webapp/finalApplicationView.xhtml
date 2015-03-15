@@ -5,6 +5,7 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 xmlns:h="http://xmlns.jcp.org/jsf/html"
 xmlns:ui="http://java.sun.com/jsf/facelets">
+    <f:view locale="#{language.locale}">
     <h:head>
 	<meta charset="utf-8"></meta>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
@@ -43,24 +44,24 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
  
 	     <div class="container">
              <h:form class="form-signin">
-                 <h4 class="form-signin-heading">Step <span class="label label-info">4 of 4</span> </h4>
+                 <h4 class="form-signin-heading"><h:outputText  value="#{msg['step']}" />  <span class="label label-info">4 <h:outputText  value="#{msg['of']}" /> 4</span> </h4>
                  <br/><br/>
-<h2 class="form-signin-heading">Register your account</h2>
-<h:outputText value="First name: #{applicationBean.firstName}"></h:outputText>
+                 <h2 class="form-signin-heading"><h:outputText  value="#{msg['application']}" /></h2>
+                 <h:outputText value="#{msg['register.firstname']}: #{applicationBean.firstName}"></h:outputText>
 <br/><br/>
-<h:outputText value="Last name: #{applicationBean.lastName}"></h:outputText>
+<h:outputText value="#{msg['register.lastname']}: #{applicationBean.lastName}"></h:outputText>
 <br/><br/>
-<h:outputText value="Social security Number: #{applicationBean.ssn}"></h:outputText>
+<h:outputText value="#{msg['register.ssn']}: #{applicationBean.ssn}"></h:outputText>
 <br/><br/>
-<h:outputText value="Mail: #{applicationBean.email}"></h:outputText>
+<h:outputText value="#{msg['register.mail']}: #{applicationBean.email}"></h:outputText>
 <br/><br/>
-<h:outputText value="Username: #{applicationBean.userName}"></h:outputText>
+<h:outputText value="#{msg['register.username']}: #{applicationBean.userName}"></h:outputText>
 <br/><br/>
- <h2 class="form-signin-heading">Your listed competences</h2>
+<h2 class="form-signin-heading"><h:outputText  value="#{msg['competence.listedcompetence']}" /></h2>
    <table class="table table-hover">
 <tr>
-<th class="order-table-header">Skill</th>
-<th class="order-table-header">Years of experience</th>
+    <th class="order-table-header"><h:outputText  value="#{msg['competence.skill']}" /></th>
+    <th class="order-table-header"><h:outputText  value="#{msg['competence.years']}" /></th>
 
 </tr>
        <ui:repeat var="competence" value="#{applicationBean.competenceList}" >
@@ -72,11 +73,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 </ui:repeat>
 </table>
  <br/><br/>
- <h2 class="form-signin-heading">Your listed availabilities</h2>
+ <h2 class="form-signin-heading"><h:outputText  value="#{msg['availability.listedavailability']}" /></h2>
    <table class="table table-hover">
 <tr>
-<th class="order-table-header">From</th>
-<th class="order-table-header">To</th>
+    <th class="order-table-header"><h:outputText  value="#{msg['availability.from']}" /></th>
+    <th class="order-table-header"><h:outputText  value="#{msg['availability.to']}" /></th>
 
 </tr>
        <ui:repeat var="a" value="#{applicationBean.availabilityList}" >
@@ -88,11 +89,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 </ui:repeat>
 </table>
 <br/><br/><br/><br/>
-<h:commandButton value="Approve" action="#{applicationBean.approveApplicant()}"></h:commandButton>
+<h:commandButton value="#{msg['approve']}" action="#{applicationBean.approveApplicant()}"></h:commandButton>
 
 </h:form>
              <br/><br/>
-             <a href="#{request.contextPath}/competence.xhtml">NEXT</a>
+             <a href="#{request.contextPath}/availability.xhtml"><h:outputText  value="#{msg['back']}" /></a>
 </div> <!-- /container -->
  
 	    <div id="footer">
@@ -104,4 +105,5 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
         </div>
  
     </h:body>
+        </f:view>
 </html>

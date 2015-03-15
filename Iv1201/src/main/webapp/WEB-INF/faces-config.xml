@@ -5,69 +5,80 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     
+    <application>
+            <locale-config>
+     	        <default-locale>en</default-locale>
+                <supported-locale>swe</supported-locale>
+     	   </locale-config>
+	   <resource-bundle>
+		<base-name>properties.application</base-name>
+		<var>msg</var>
+	   </resource-bundle>
+     </application>
+    
     <navigation-rule>
-	<from-view-id>standardTemplate.xhtml</from-view-id>
+	<from-view-id>/standardTemplate.xhtml</from-view-id>
 	<navigation-case>
 		<from-action>#{applicationBean.savePerson()}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>competence.xhtml</to-view-id>
+		<to-view-id>/competence.xhtml</to-view-id>
 	</navigation-case>
 	<navigation-case>
 		<from-action>#{applicationBean.savePerson()}</from-action>
 		<from-outcome>fail</from-outcome>
-		<to-view-id>error.xhtml</to-view-id>
+		<to-view-id>/error.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
      <navigation-rule>
-	<from-view-id>standardTemplate.xhtml</from-view-id>
+	<from-view-id>/standardTemplate.xhtml</from-view-id>
 	<navigation-case>
 		<from-action>#{applicationBean.saveCompetence()}</from-action>
 		<from-outcome>competenceSuccess</from-outcome>
-		<to-view-id>availability.xhtml</to-view-id>
+		<to-view-id>/availability.xhtml</to-view-id>
 	</navigation-case>
 	<navigation-case>
 		<from-action>#{applicationBean.saveCompetence()}</from-action>
 		<from-outcome>competenceFail</from-outcome>
-		<to-view-id>competence.xhtml</to-view-id>
+		<to-view-id>/competence.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
     <navigation-rule>
-	<from-view-id>finalApplicationView.xhtml</from-view-id>
+	<from-view-id>/finalApplicationView.xhtml</from-view-id>
 	<navigation-case>
 		<from-action>#{applicationBean.approveApplicant()}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>standardTemplate.xhtml</to-view-id>
+		<to-view-id>/standardTemplate.xhtml</to-view-id>
 	</navigation-case>
 	<navigation-case>
 		<from-action>#{applicationBean.approveApplicant()}</from-action>
 		<from-outcome>fail</from-outcome>
-		<to-view-id>error.xhtml</to-view-id>
+		<to-view-id>/error.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
     <navigation-rule>
-	<from-view-id>competence.xhtml</from-view-id>
+	<from-view-id>/competence.xhtml</from-view-id>
 	<navigation-case>
 		<from-action>#{applicationBean.saveCompetence()}</from-action>
 		<from-outcome>competenceSuccess</from-outcome>
-		<to-view-id>availability.xhtml</to-view-id>
+		<to-view-id>/availability.xhtml</to-view-id>
 	</navigation-case>
 	<navigation-case>
 		<from-action>#{applicationBean.saveCompetence()}</from-action>
 		<from-outcome>competenceFail</from-outcome>
-		<to-view-id>competence.xhtml</to-view-id>
+		<to-view-id>/competence.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
     <navigation-rule>
-	<from-view-id>availability.xhtml</from-view-id>
+	<from-view-id>/availability.xhtml</from-view-id>
 	<navigation-case>
 		<from-action>#{applicationBean.saveAvailability()}</from-action>
 		<from-outcome>availabilitySuccess</from-outcome>
-		<to-view-id>finalApplicationView.xhtml</to-view-id>
+		<to-view-id>/finalApplicationView.xhtml</to-view-id>
 	</navigation-case>
 	<navigation-case>
 		<from-action>#{applicationBean.saveAvailability()}</from-action>
 		<from-outcome>availabilityFail</from-outcome>
-		<to-view-id>availability.xhtml</to-view-id>
+		<to-view-id>/availability.xhtml</to-view-id>
 	</navigation-case>
     </navigation-rule>
     
