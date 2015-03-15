@@ -4,6 +4,7 @@
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <f:view locale="#{language.locale}">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,43 +13,44 @@ xmlns:h="http://xmlns.jcp.org/jsf/html">
         
          <div class="container">
              
-   
+   <br/><br/>
              <h:outputScript library="js" name="validation.js" />
              <h:form id="registerForm" class="form-signin" >
-                 <h4 class="form-signin-heading">Step <span class="label label-info">1 of 4</span> </h4>
-                 <br/><br/>
-<h2 class="form-signin-heading">Register your account</h2>
+                 <h4 class="form-signin-heading"><h:outputText  value="#{msg['step']}" />  <span class="label label-info">1 <h:outputText  value="#{msg['of']}" /> 4</span> </h4>
+                 <br/>
+                 <h2 class="form-signin-heading"><h:outputText  value="#{msg['register.welcome']}" /></h2>
 <h:outputText id="error"  ></h:outputText>
-<h:outputLabel for="firstName" value="First name"></h:outputLabel>
+<h:outputLabel for="firstName"><h:outputText  value="#{msg['register.firstname']}" /></h:outputLabel>
 <h:inputText class="form-control" id="firstName" required="true" requiredMessage="-FirstName- cannot be left blank."  value="#{applicationBean.firstName}"><f:validateLength minimum="4" maximum="16" /></h:inputText>
 <h:message for="firstName" style="color:red"/>
 <br/>
-<h:outputLabel for="lastName" value="Last name"></h:outputLabel>
+<h:outputLabel for="lastName" ><h:outputText value="#{msg['register.lastname']}"/></h:outputLabel>
 <h:inputText class="form-control" id="lastName" required="true" requiredMessage="-LastName- cannot be left blank." value="#{applicationBean.lastName}"><f:validateLength minimum="3" maximum="16" /></h:inputText>
 <h:message for="lastName" style="color:red"/>
 <br/>
-<h:outputLabel for="SSN" value="Social security Number"></h:outputLabel>
+<h:outputLabel for="SSN" ><h:outputText  value="#{msg['register.ssn']}"/></h:outputLabel>
 <h:inputText class="form-control" id="SSN" required="true" requiredMessage="-SocialSecurityNumber- cannot be left blank." value="#{applicationBean.ssn}"><f:validateLength minimum="5" maximum="10" /></h:inputText>
 <h:message for="SSN" style="color:red"/>
 <br/>
-<h:outputLabel for="mail" value="Mail"></h:outputLabel>
+<h:outputLabel for="mail"><h:outputText  value="#{msg['register.mail']}"/></h:outputLabel>
 <h:inputText class="form-control" id="mail" required="true" requiredMessage="-Mail- cannot be left blank." value="#{applicationBean.email}"><f:validateLength minimum="5" maximum="32" /></h:inputText>
 <h:message for="mail" style="color:red"/>
 <br/>
-<h:outputLabel for="username" value="Username"></h:outputLabel>
+<h:outputLabel for="username"><h:outputText  value="#{msg['register.username']}"/></h:outputLabel>
 <h:inputText class="form-control" id="username" required="true" requiredMessage="-Username- cannot be left blank." value="#{applicationBean.userName}"><f:validateLength minimum="5" maximum="10" /></h:inputText>
 <h:message for="username" style="color:red"/>
 <br/>
-<h:outputLabel for="password" value="Password"></h:outputLabel>
+<h:outputLabel for="password" ><h:outputText  value="#{msg['register.password']}"/></h:outputLabel>
 <h:inputSecret class="form-control" id="password" required="true" value="#{applicationBean.password}"></h:inputSecret>
 <h:message for="password" style="color:red"/>
 <br/>
-<h:commandButton value="Save" onclick="return validateRegister()" action="#{applicationBean.savePerson()}"></h:commandButton>
+<h:commandButton class="btn btn-success" value="#{msg['save']}" onclick="return validateRegister()" action="#{applicationBean.savePerson()}"></h:commandButton>
 </h:form>
              <br/><br/>
-             
+              
 </div> <!-- /container -->
 <br/><br/>
 <br/><br/>
     </body>
+        </f:view>
 </html>

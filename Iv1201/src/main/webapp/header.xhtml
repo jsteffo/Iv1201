@@ -22,8 +22,9 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 </div>
 <div id="navbar" class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<li class="active"> <a href="#{request.contextPath}/jobs.xhtml">Home</a></li>
-<li > <a href="#{request.contextPath}/jobs.xhtml">Register</a></li>
+<li > <a href="#{request.contextPath}/home.xhtml"><h:outputText  value="#{msg.linkHome}" /></a></li>
+<li > <a href="#{request.contextPath}/standardTemplate.xhtml"><h:outputText  value="#{msg.linkRegister}" /></a></li>
+<li > <a href="#{request.contextPath}/recruitView.xhtml"><h:outputText  value="#{msg.linkRecruiter}" /></a></li>
 </ul>
 
  <h:form class="navbar-form navbar-right">
