@@ -29,10 +29,10 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-  <welcome-file-list>
-    <welcome-file>faces/home.jsf</welcome-file>
-</welcome-file-list>
-		<security-role>
+	<welcome-file-list>
+		<welcome-file>faces/home.jsf</welcome-file>
+	</welcome-file-list>
+	<security-role>
 		<role-name>admin</role-name>
 	</security-role>
 
@@ -42,7 +42,7 @@
 			<url-pattern>/faces/mytest.xhtml</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
-		
+
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>
@@ -59,7 +59,7 @@
 			<form-login-page>/faces/login.xhtml</form-login-page>
 			<form-error-page>/faces/myError.xhtml</form-error-page>
 		</form-login-config>
-		
+
 	</login-config>
-	
+
 </web-app>
