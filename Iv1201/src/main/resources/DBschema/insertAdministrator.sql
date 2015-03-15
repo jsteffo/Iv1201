@@ -1,0 +1,1 @@
+insert into person(username, password, role_id) values('admin', sha2('boll123', 256), 1)

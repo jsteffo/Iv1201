@@ -26,8 +26,8 @@ public class ApplicantTest
     public static JavaArchive createDeployment() 
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(GeneralDAO.class)
-                .addPackage(Person.class.getPackage())
+        	.addClass(GeneralDAO.class)
+        	.addPackage(Person.class.getPackage())
     		.addPackage(PersonDTO.class.getPackage())
     		.addAsManifestResource("test-persistence.xml",ArchivePaths.create("persistence.xml"))
     		.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");

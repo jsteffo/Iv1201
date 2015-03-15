@@ -9,5 +9,6 @@
 		<class>model.CompetenceProfile</class>
 		<class>model.Person</class>
 		<class>model.Role</class>
+<!-- 		<class>model.LocalDateConverter</class> -->
 	</persistence-unit>
 </persistence>

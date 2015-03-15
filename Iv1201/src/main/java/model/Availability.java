@@ -1,10 +1,11 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.*;
 
-import java.util.Date;
+
 
 
 /**
@@ -22,12 +23,14 @@ public class Availability implements Serializable {
 	@Column(name="availability_id")
 	private long availabilityId;
 
-	@Temporal(TemporalType.DATE)
+
 	@Column(name="from_date")
+	//@Temporal(TemporalType.DATE)
 	private Date fromDate;
 
-	@Temporal(TemporalType.DATE)
+	
 	@Column(name="to_date")
+	//@Temporal(TemporalType.DATE)
 	private Date toDate;
 
 	//bi-directional many-to-one association to Person

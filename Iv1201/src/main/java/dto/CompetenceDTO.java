@@ -1,10 +1,12 @@
 package dto;
 
+import java.math.BigDecimal;
+
 public class CompetenceDTO {
 
 	private String name;
-	private int yearsOfExperience;
-	public CompetenceDTO(String name, int yearsOfExperience) {
+	private BigDecimal yearsOfExperience;
+	public CompetenceDTO(String name, BigDecimal yearsOfExperience) {
 		super();
 		this.name = name;
 		this.yearsOfExperience = yearsOfExperience;
@@ -19,10 +21,10 @@ public class CompetenceDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getYearsOfExperience() {
+	public BigDecimal getYearsOfExperience() {
 		return yearsOfExperience;
 	}
-	public void setYearsOfExperience(int yearsOfExperience) {
+	public void setYearsOfExperience(BigDecimal yearsOfExperience) {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 	

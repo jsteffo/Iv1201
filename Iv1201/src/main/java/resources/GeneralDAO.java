@@ -2,36 +2,36 @@ package resources;
 
 
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJBException;
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptor;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
 
 
-import util.LoggingInterceptor;
+
 
 import model.Availability;
 import model.Competence;
 import model.CompetenceProfile;
 import model.Person;
 import model.Role;
+import util.LoggingInterceptor;
 import dto.ApplicantDTO;
 import dto.AvailabilityDTO;
 import dto.CompetenceDTO;
 import dto.PersonDTO;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
+import dto.SearchCriteriaDTO;
 import exception.NoSuchCompetenceException;
 
 
@@ -41,8 +41,8 @@ public class GeneralDAO {
 
 	private final long recruit = 1;
 	private final long applicant = 2;
-	
-	
+
+
 	@PersistenceContext
 	EntityManager em;
 
@@ -62,8 +62,8 @@ public class GeneralDAO {
 		p.setUsername(dto.getUserName());
 		p.setRole(em.find(Role.class, applicant));
 		em.persist(p);
-		
-		
+
+
 	}
 
 	/**
@@ -94,8 +94,8 @@ public class GeneralDAO {
 
 		for(AvailabilityDTO aDto : dto){
 			Availability a = new Availability();
-			a.setFromDate(java.sql.Date.valueOf(aDto.getFromDate()));
-			a.setToDate(java.sql.Date.valueOf(aDto.getToDate()));
+			a.setFromDate(Date.valueOf(aDto.getFromDate()));
+			a.setToDate(Date.valueOf(aDto.getToDate()));
 			p.addAvailability(a);
 			em.persist(a);	
 		}
@@ -112,7 +112,7 @@ public class GeneralDAO {
 		for(CompetenceDTO cDto : dto) {
 			CompetenceProfile cProfile = new CompetenceProfile();
 			cProfile.setPerson(p);
-			cProfile.setYearsOfExperience(new BigDecimal(cDto.getYearsOfExperience()));
+			cProfile.setYearsOfExperience(cDto.getYearsOfExperience());
 			Competence c = getCompetence(cDto.getName());
 			cProfile.setCompetence(c);
 			em.persist(cProfile);
@@ -133,26 +133,97 @@ public class GeneralDAO {
 		return (Competence) compList.get(0);
 	}
 
-	
-        
-        /**
+
+
+	/**
 	 * Get all the available competences in the DB
 	 * @return - List of CompetenceDTO which will be available
 	 */
-        public List<CompetenceDTO> getAllCompetences(){
-            
-            TypedQuery<Competence> getAll = em.createNamedQuery("Competence.findAll", Competence.class);
-            List<Competence> resultQuery = getAll.getResultList();
-            List<CompetenceDTO> finalResultList = new ArrayList<CompetenceDTO>();
-            for (int i = 0; i < resultQuery.size(); i++) {
-                CompetenceDTO resObject = new CompetenceDTO();
-                resObject.setName(resultQuery.get(i).getName());
-                finalResultList.add(resObject);
-            }
+	public List<CompetenceDTO> getAllCompetences(){
 
-            return finalResultList;
-        }
+		TypedQuery<Competence> getAll = em.createNamedQuery("Competence.findAll", Competence.class);
+		List<Competence> resultQuery = getAll.getResultList();
+		List<CompetenceDTO> finalResultList = new ArrayList<CompetenceDTO>();
+		for (int i = 0; i < resultQuery.size(); i++) {
+			CompetenceDTO resObject = new CompetenceDTO();
+			resObject.setName(resultQuery.get(i).getName());
+			finalResultList.add(resObject);
+		}
 
+		return finalResultList;
+	}
+
+	//Eventuellt vill vi dela upp koden i mindre bitar... Men börjar med att bara skriva skiten
+
+	public List <Person> getAllPersons(){
+		return em.createNamedQuery("Person.findAll", Person.class).getResultList();
+	}
+
+	public List<Person> getAllApplicants(){
+		String sql = "Select p from Person p INNER JOIN p.role r where r.roleId= :param1";
+		return em.createQuery(sql, Person.class).setParameter("param1", applicant).getResultList();
+	}
+	
+	
+	/**
+	 * Get all Persons that fulfills searchCriteria in SearchDTO
+	 * It's enough if one availability or competence of listed fullfills criteria
+	 * @param s
+	 * @return
+	 */
+	public List<Person> searchPersons(SearchCriteriaDTO s){
+		
+		List<Person> personList = getAllApplicants();
+		List<Person> returnList = new ArrayList<Person>();
+		
+		for(Person p : personList) {
+			Boolean accept = true;
+			if(!s.getName().isEmpty()){
+				if(!p.getName().equals(s.getName())){
+					accept = false;
+				}
+			}
+			if(!s.getSurname().isEmpty()) {
+				if(!p.getSurname().equals(s.getSurname())){
+					accept = false;
+				}
+			}
+			boolean isFrom = false;
+			boolean isTo = false;
+			for(Availability a : p.getAvailabilities()){
+				if(s.getFromDate().isBefore(a.getFromDate().toLocalDate())){
+					isFrom = true;
+					break;
+				}
+			}
+			for(Availability a : p.getAvailabilities()){
+				if(s.getToDate().isAfter(a.getToDate().toLocalDate())){
+					isTo= true;
+					break;
+				}
+			}
+			if(!isFrom || !isTo){
+				accept = false;
+			}
+			 
+			if(!s.getCompetence().isEmpty()){
+				boolean isCompetence = false;
+				for(CompetenceProfile cp : p.getCompetenceProfiles()){
+					if(s.getCompetence().equals(cp.getCompetence().getName())){
+						isCompetence = true;
+					}
+				}
+				if(!isCompetence){
+					accept = false;
+				}
+			}
+			if(accept){
+				returnList.add(p);
+			}
+		}
+		return returnList;
+
+	}
 
 
 	//	/**

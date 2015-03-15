@@ -1,5 +1,6 @@
 package view;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,8 @@ import dto.PersonDTO;
 
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
-import model.Competence;
 
+import model.Competence;
 import exception.NoSuchCompetenceException;
 
 
@@ -27,13 +28,13 @@ import exception.NoSuchCompetenceException;
 @SessionScoped
 public class ApplicationBean {
 
-	
+
 	@Inject
 	ControllerEJB controller;
-	
+
 	@Inject
 	Logger logger;
-	
+
 	private String firstName;
 	private String lastName;
 	private String ssn;
@@ -41,119 +42,119 @@ public class ApplicationBean {
 	private String password;
 	private String userName;
 	private LocalDate fromDate;
-        private String fromDateDay;
-        private String fromDateMonth;
-        private String fromDateYear;
-        
+	private String fromDateDay;
+	private String fromDateMonth;
+	private String fromDateYear;
+
 	private LocalDate toDate;
-        private String toDateDay;
-        private String toDateMonth;
-        private String toDateYear;
-        
+	private String toDateDay;
+	private String toDateMonth;
+	private String toDateYear;
+
 	//Vill väl egentligen ha nedanstående i lista?
 	private String competenceName;
 	private String competenceDuration;
 	private CompetenceDTO competence;
-        private List<AvailabilityDTO> availabilityList = new ArrayList<AvailabilityDTO>();
-        private List<String> days = new ArrayList<String>();
-        private List<String> months = new ArrayList<String>();
-        private List<String> years = new ArrayList<String>();
-        
-        private List<CompetenceDTO> competenceList = new ArrayList<CompetenceDTO>();
+	private List<AvailabilityDTO> availabilityList = new ArrayList<AvailabilityDTO>();
+	private List<String> days = new ArrayList<String>();
+	private List<String> months = new ArrayList<String>();
+	private List<String> years = new ArrayList<String>();
+
+	private List<CompetenceDTO> competenceList = new ArrayList<CompetenceDTO>();
 	private List<CompetenceDTO> existingCompetences = new ArrayList<CompetenceDTO>();
-        private List<String> dropdownCompetences = new ArrayList<String>();
+	private List<String> dropdownCompetences = new ArrayList<String>();
 
-      
-        private void initAvailability(){
-            
-            for (int i = 1; i < 13; i++) {
-                months.add(Integer.toString(i));
-            }
-            for (int i = 1; i < 32; i++) {
-                days.add(Integer.toString(i));
-            }
-            for (int i = 2014; i < 2020; i++) {
-                years.add(Integer.toString(i));
-            }
-            
-            
-            
-            
-        }
 
-    public String getFromDateDay() {
-        return fromDateDay;
-    }
+	private void initAvailability(){
 
-    public void setFromDateDay(String fromDateDay) {
-        this.fromDateDay = fromDateDay;
-    }
+		for (int i = 1; i < 13; i++) {
+			months.add(Integer.toString(i));
+		}
+		for (int i = 1; i < 32; i++) {
+			days.add(Integer.toString(i));
+		}
+		for (int i = 2014; i < 2020; i++) {
+			years.add(Integer.toString(i));
+		}
 
-    public String getFromDateMonth() {
-        return fromDateMonth;
-    }
 
-    public void setFromDateMonth(String fromDateMonth) {
-        this.fromDateMonth = fromDateMonth;
-    }
 
-    public String getFromDateYear() {
-        return fromDateYear;
-    }
 
-    public void setFromDateYear(String fromDateYear) {
-        this.fromDateYear = fromDateYear;
-    }
+	}
 
-    public String getToDateDay() {
-        return toDateDay;
-    }
+	public String getFromDateDay() {
+		return fromDateDay;
+	}
 
-    public void setToDateDay(String toDateDay) {
-        this.toDateDay = toDateDay;
-    }
+	public void setFromDateDay(String fromDateDay) {
+		this.fromDateDay = fromDateDay;
+	}
 
-    public String getToDateMonth() {
-        return toDateMonth;
-    }
+	public String getFromDateMonth() {
+		return fromDateMonth;
+	}
 
-    public void setToDateMonth(String toDateMonth) {
-        this.toDateMonth = toDateMonth;
-    }
+	public void setFromDateMonth(String fromDateMonth) {
+		this.fromDateMonth = fromDateMonth;
+	}
 
-    public String getToDateYear() {
-        return toDateYear;
-    }
+	public String getFromDateYear() {
+		return fromDateYear;
+	}
 
-    public void setToDateYear(String toDateYear) {
-        this.toDateYear = toDateYear;
-    }
+	public void setFromDateYear(String fromDateYear) {
+		this.fromDateYear = fromDateYear;
+	}
 
-    public List<String> getDays() {
-        return days;
-    }
+	public String getToDateDay() {
+		return toDateDay;
+	}
 
-    public void setDays(List<String> days) {
-        this.days = days;
-    }
+	public void setToDateDay(String toDateDay) {
+		this.toDateDay = toDateDay;
+	}
 
-    public List<String> getMonths() {
-        return months;
-    }
+	public String getToDateMonth() {
+		return toDateMonth;
+	}
 
-    public void setMonths(List<String> months) {
-        this.months = months;
-    }
+	public void setToDateMonth(String toDateMonth) {
+		this.toDateMonth = toDateMonth;
+	}
 
-    public List<String> getYears() {
-        return years;
-    }
+	public String getToDateYear() {
+		return toDateYear;
+	}
 
-    public void setYears(List<String> years) {
-        this.years = years;
-    }
-        
-        
+	public void setToDateYear(String toDateYear) {
+		this.toDateYear = toDateYear;
+	}
+
+	public List<String> getDays() {
+		return days;
+	}
+
+	public void setDays(List<String> days) {
+		this.days = days;
+	}
+
+	public List<String> getMonths() {
+		return months;
+	}
+
+	public void setMonths(List<String> months) {
+		this.months = months;
+	}
+
+	public List<String> getYears() {
+		return years;
+	}
+
+	public void setYears(List<String> years) {
+		this.years = years;
+	}
+
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -220,59 +221,61 @@ public class ApplicationBean {
 	public void setCompetence(CompetenceDTO competence) {
 		this.competence = competence;
 	}
-        public List<AvailabilityDTO> getAvailabilityList() {
-                return availabilityList;
-        }
+	public List<AvailabilityDTO> getAvailabilityList() {
+		return availabilityList;
+	}
 
-        public List<CompetenceDTO> getCompetenceList() {
-                return competenceList;
-        }
-        public List<CompetenceDTO> getExistingCompetences() {
-            return existingCompetences;
-        }
-        
-        public void addCompetence(){
-            CompetenceDTO cDTO = new CompetenceDTO(competenceName, Integer.parseInt(competenceDuration));
-            competenceList.add(cDTO);
-            competenceName = "";
-            competenceDuration = "";
-            
-        }
-        
-        
-        //will clear list of compentences
-        public void clearCompetences(){
-            competenceList.clear();
-        }
-        
-        //this probably will not work without regex validation and conversion!!!!! NOT TESTED
+	public List<CompetenceDTO> getCompetenceList() {
+		return competenceList;
+	}
+	public List<CompetenceDTO> getExistingCompetences() {
+		return existingCompetences;
+	}
+
+	public void addCompetence(){
+
+		CompetenceDTO cDTO = new CompetenceDTO(competenceName, 
+				BigDecimal.valueOf(Integer.parseInt(competenceDuration)));
+		competenceList.add(cDTO);
+		competenceName = "";
+		competenceDuration = "";
+
+	}
+
+
+	//will clear list of compentences
+	public void clearCompetences(){
+		competenceList.clear();
+	}
+
+	//this probably will not work without regex validation and conversion!!!!! NOT TESTED
 	public void addAvailability(){
-            
-            AvailabilityDTO aDTO = new AvailabilityDTO();
-            LocalDate from = LocalDate.of(Integer.parseInt(fromDateYear), Integer.parseInt(fromDateMonth), Integer.parseInt(fromDateDay));
-            LocalDate to = LocalDate.of(Integer.parseInt(toDateYear), Integer.parseInt(toDateMonth), Integer.parseInt(toDateDay));
-            
-            
-            aDTO.setFromDate(from);
-            aDTO.setToDate(to);
-            availabilityList.add(aDTO);
-          
-        }
-        //Will empty the list of available periods
-        public void clearAvailabilities(){
-           availabilityList.clear();
-        }
-        
-        //will convert competences from DB so that the list of names may be used in a dropdown list
-        public List<String> getDropdownCompetences() {
-        dropdownCompetences.clear();
-        for (int i = 0; i < existingCompetences.size(); i++) {
-                dropdownCompetences.add(existingCompetences.get(i).getName());
-            }
-        
-        return dropdownCompetences;
-        }
-        
+
+		AvailabilityDTO aDTO = new AvailabilityDTO();
+		LocalDate from = LocalDate.of(Integer.parseInt(fromDateYear), Integer.parseInt(fromDateMonth), Integer.parseInt(fromDateDay));
+		LocalDate to = LocalDate.of(Integer.parseInt(toDateYear), Integer.parseInt(toDateMonth), Integer.parseInt(toDateDay));
+
+
+		aDTO.setFromDate(from);
+		aDTO.setToDate(to);
+		availabilityList.add(aDTO);
+
+	}
+	//Will empty the list of available periods
+	public void clearAvailabilities(){
+		availabilityList.clear();
+	}
+
+	//will convert competences from DB so that the list of names may be used in a dropdown list
+	public List<String> getDropdownCompetences() {
+		dropdownCompetences.clear();
+		for (int i = 0; i < existingCompetences.size(); i++) {
+			dropdownCompetences.add(existingCompetences.get(i).getName());
+		}
+
+		return dropdownCompetences;
+	}
+
 	//early version do not use. Is ok to use for test.
 	public void submit(){
 		//Add just a bunch of data. Rest of person data is null for now
@@ -280,15 +283,15 @@ public class ApplicationBean {
 		personDTO.setFirstName(firstName);
 		personDTO.setLastName(lastName);
 		personDTO.setSsn(ssn);
-		
+
 		//Add competences. Make sure supplied names exist in DB
 		List <CompetenceDTO> competenceList = new ArrayList<CompetenceDTO>();
-		CompetenceDTO cDTO = new CompetenceDTO("kock", 5);
+		CompetenceDTO cDTO = new CompetenceDTO("kock", BigDecimal.valueOf(5));
 		competenceList.add(cDTO);
-		cDTO = new CompetenceDTO("dykare", 3);
+		cDTO = new CompetenceDTO("dykare", BigDecimal.valueOf(3));
 		competenceList.add(cDTO);
-		
-		
+
+
 		//Add availabilities. For person
 		List<AvailabilityDTO> availabilityList= new ArrayList<AvailabilityDTO>();
 		AvailabilityDTO aDTO  = new AvailabilityDTO();
@@ -303,102 +306,103 @@ public class ApplicationBean {
 			controller.addApplication(personDTO, availabilityList, competenceList);
 		} catch (NoSuchCompetenceException e) {
 			logger.log(Level.WARNING, "Name of competence: " + e.getName(), e);
-			
+
 		}
 	}
- 
-        
-        
-        //will be used with the form for registration part 1 in order to move to next step
-        public String savePerson(){
-            //add validation being made by tag library + js form validation
-            //This is mainly to use navigational rules
-            return "success";
-        }
-        
-        //will be used with the form for registration part 2 in order to move to next step
-        public String saveCompetence(){
-            if (competenceList.size() < 1) {
-                return "competenceFail";
-                
-            }
-            return "competenceSuccess";
-        }
-        
-        
-        //will be used with the form for registration part 3 in order to move to next step
-        
-        public String saveAvailability(){
-            if (availabilityList.size() < 1) {
-                return "availabilityFail";
-            }
-            
-            return "availabilitySuccess";
-        }
-                
-        
-        //will be used with the form for registration part 3
-        public String submitAvailability(){
-            AvailabilityDTO aDTO = new AvailabilityDTO();
-            aDTO.setFromDate(fromDate);
-            aDTO.setToDate(toDate);
-            
-            return "fail";
-        }
-        
-        
-        //will be used with the form for registration part 2
-        public String submitCompetence(){
-            CompetenceDTO cDTO = new CompetenceDTO(competenceName, Integer.parseInt(competenceDuration));
-            
-            //add validation before reroute to next step
-            return "fail";
-        }
-        
-        
-        /**
+
+
+
+	//will be used with the form for registration part 1 in order to move to next step
+	public String savePerson(){
+		//add validation being made by tag library + js form validation
+		//This is mainly to use navigational rules
+		return "success";
+	}
+
+	//will be used with the form for registration part 2 in order to move to next step
+	public String saveCompetence(){
+		if (competenceList.size() < 1) {
+			return "competenceFail";
+
+		}
+		return "competenceSuccess";
+	}
+
+
+	//will be used with the form for registration part 3 in order to move to next step
+
+	public String saveAvailability(){
+		if (availabilityList.size() < 1) {
+			return "availabilityFail";
+		}
+
+		return "availabilitySuccess";
+	}
+
+
+	//will be used with the form for registration part 3
+	public String submitAvailability(){
+		AvailabilityDTO aDTO = new AvailabilityDTO();
+		aDTO.setFromDate(fromDate);
+		aDTO.setToDate(toDate);
+
+		return "fail";
+	}
+
+
+	//will be used with the form for registration part 2
+	public String submitCompetence(){
+		CompetenceDTO cDTO = new CompetenceDTO(competenceName, 
+				BigDecimal.valueOf(Integer.parseInt(competenceDuration)));
+
+		//add validation before reroute to next step
+		return "fail";
+	}
+
+
+	/**
 	 * Get all the available competences in the DB from controller
 	 * @return - List of CompetenceDTO which will be available for the dropdowns in the application process
 	 */
-        @PostConstruct
-        public void getAllCompetences(){
-            
-            existingCompetences =  controller.getAllCompetences();
-            initAvailability();
-           // SelectItem convert data..
-        }
-        
-        
-        /**
+	@PostConstruct
+	public void getAllCompetences(){
+
+		existingCompetences =  controller.getAllCompetences();
+		initAvailability();
+		// SelectItem convert data..
+	}
+
+
+	/**
 	 * Will take all the data submitted by the user and call the 
 	 * @return - right now no return value
 	 */
-        public String approveApplicant(){
-            PersonDTO pDTO = new PersonDTO();
-            pDTO.setFirstName(firstName);
-            pDTO.setLastName(lastName);
-            pDTO.setSsn(ssn);
-            pDTO.setEmail(email);
-            pDTO.setUserName(userName);
-            pDTO.setPassword(password);
-            
-            try {
-			 controller.addApplication(pDTO, availabilityList, competenceList);
+	public String approveApplicant(){
+		PersonDTO pDTO = new PersonDTO();
+		pDTO.setFirstName(firstName);
+		pDTO.setLastName(lastName);
+		pDTO.setSsn(ssn);
+		pDTO.setEmail(email);
+		pDTO.setUserName(userName);
+		pDTO.setPassword(password);
+
+		try {
+			controller.addApplication(pDTO, availabilityList, competenceList);
 		} catch (NoSuchCompetenceException e) {
 			logger.log(Level.WARNING, "Name of competence: " + e.getName(), e);
-			
+
 		}
-           
-            availabilityList.clear();
-            competenceList.clear();
-            userName="";
-            lastName="";
-            email="";
-            ssn="";
-            userName="";
-            password="";
-            
-            return "success";
-        }
-	
+
+		availabilityList.clear();
+		competenceList.clear();
+		userName="";
+		lastName="";
+		email="";
+		ssn="";
+		userName="";
+		password="";
+
+		return "success";
+	}
+
 }
