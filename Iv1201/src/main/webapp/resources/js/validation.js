@@ -44,6 +44,10 @@ function validateCompetence(){
     
 }
 
+function validateAddAvailability(){
+    var x = document.getElementById("listedAvailability")
+}
+
 function validateAvailability(){
     
      var x = document.getElementById("listedAvailability").rows.length;
