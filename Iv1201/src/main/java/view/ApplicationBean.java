@@ -51,7 +51,6 @@ public class ApplicationBean {
 	private String toDateMonth;
 	private String toDateYear;
 
-	//Vill väl egentligen ha nedanstående i lista?
 	private String competenceName;
 	private String competenceDuration;
 	private CompetenceDTO competence;
@@ -248,12 +247,16 @@ public class ApplicationBean {
 	}
 
 
-	//will clear list of compentences
+	/**
+	 * Clear competenceList
+	 */
 	public void clearCompetences(){
 		competenceList.clear();
 	}
         
-	//Will add availability to list and validate input.
+	/**
+	 * Add an availability to temporary list
+	 */
 	public void addAvailability(){
 
 		AvailabilityDTO aDTO = new AvailabilityDTO();
@@ -318,12 +321,17 @@ public class ApplicationBean {
                 availabilityMessage = "";
                 
 	}
-	//Will empty the list of available periods
+	/**
+	 * Lets user remove entered availability
+	 */
 	public void clearAvailabilities(){
 		availabilityList.clear();
 	}
 
-	//will convert competences from DB so that the list of names may be used in a dropdown list
+	/**
+	 * Converts Competence object to Strings in order to put them in a drop down list
+	 * @return Return list of Competence names
+	 */
 	public List<String> getDropdownCompetences() {
 		dropdownCompetences.clear();
 		for (int i = 0; i < existingCompetences.size(); i++) {
@@ -368,7 +376,10 @@ public class ApplicationBean {
 	}
 
 
-
+	/**
+	 * Used to submit first form in application registry process
+	 * @return String used for navigational rule
+	 */
 	//will be used with the form for registration part 1 in order to move to next step
 	public String savePerson(){
 		//add validation being made by tag library + js form validation
@@ -376,7 +387,10 @@ public class ApplicationBean {
 		return "success";
 	}
 
-	//will be used with the form for registration part 2 in order to move to next step
+	/**
+	 * will be used with the form for registration part 2 in order to move to next step
+	 * @return
+	 */
 	public String saveCompetence(){
 		if (competenceList.size() < 1) {
 			return "competenceFail";
@@ -386,8 +400,11 @@ public class ApplicationBean {
 	}
 
 
-	//will be used with the form for registration part 3 in order to move to next step
-
+	
+	/**
+	 * will be used with the form for registration part 3 in order to move to next step
+	 * @return
+	 */
 	public String saveAvailability(){
 		if (availabilityList.size() < 1) {
 			return "availabilityFail";
@@ -397,7 +414,10 @@ public class ApplicationBean {
 	}
 
 
-	//will be used with the form for registration part 3
+	/**
+	 * will be used with the form for registration part 3
+	 * @return
+	 */
 	public String submitAvailability(){
 		AvailabilityDTO aDTO = new AvailabilityDTO();
 		aDTO.setFromDate(fromDate);
@@ -407,7 +427,10 @@ public class ApplicationBean {
 	}
 
 
-	//will be used with the form for registration part 2
+	/**
+	 * will be used with the form for registration part 2
+	 * @return
+	 */
 	public String submitCompetence(){
 		CompetenceDTO cDTO = new CompetenceDTO(competenceName, 
 				BigDecimal.valueOf(Integer.parseInt(competenceDuration)));

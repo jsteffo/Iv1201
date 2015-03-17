@@ -14,7 +14,11 @@ import javax.ws.rs.core.MediaType;
 import model.Person;
 import dto.CompleteApplicationDTO;
 import dto.PersonDTO;
-
+/**
+ * Restless service used to show all applicants in database
+ * @author stefan
+ *
+ */
 @Path("/applicants")
 @Produces(MediaType.APPLICATION_XML)
 public class Service {

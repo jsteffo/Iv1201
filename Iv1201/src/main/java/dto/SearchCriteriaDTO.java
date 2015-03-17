@@ -2,6 +2,11 @@ package dto;
 
 import java.time.LocalDate;
 
+/**
+ * Class used to transfer data related to a search query
+ * @author stefan
+ *
+ */
 public class SearchCriteriaDTO {
 
 	private LocalDate fromDate;

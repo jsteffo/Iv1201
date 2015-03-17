@@ -1,5 +1,10 @@
 package dto;
 
+/**
+ * Class used to transfer data related to a Role entity
+ * @author stefan
+ *
+ */
 public class RoleDTO {
 
 	private String name;

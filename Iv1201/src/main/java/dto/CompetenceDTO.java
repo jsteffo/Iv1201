@@ -2,6 +2,11 @@ package dto;
 
 import java.math.BigDecimal;
 
+/**
+ * Class used to transfer data related to a Competence entity
+ * @author stefan
+ *
+ */
 public class CompetenceDTO {
 
 	private String name;

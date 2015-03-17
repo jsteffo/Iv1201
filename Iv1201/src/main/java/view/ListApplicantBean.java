@@ -104,10 +104,13 @@ public class ListApplicantBean {
 		this.surname = surname;
 	}
 
-	//Rimligt att tillåta null
+
 	public void submitSearchApplicants() {
 
 	}
+	/**
+	 * Calls backend to look for application that fullfills search criteria
+	 */
 	public void search(){
 		System.out.println("Search pressed");
 
@@ -138,15 +141,13 @@ public class ListApplicantBean {
 
 
 		setCompleteApplicationList(controller.searchApplications(s));
-//		for(CompleteApplicationDTO c : complete ){
-//			System.out.println(c.getPersonDTO().getFirstName());
-//			System.out.println(c.getPersonDTO().getLastName());
-//			System.out.println(c.getCompetenceDTO().get(0).getName());
-//			System.out.println(c.getCompetenceDTO().get(0).getYearsOfExperience());
-//		}
+
 	}
 
-	 
+	/**
+	 * Transforms the complete application of an applicant to a pdf
+	 * @param dto Used for transformation
+	 */
 	public void pdf(CompleteApplicationDTO dto){
 		try{
 			FacesContext fc = FacesContext.getCurrentInstance();

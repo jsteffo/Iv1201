@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 /**
- * Allows us to use @Inject Logger. 
+ * Allows us to use @Inject annotation to initialize Logger using CDI
  * @author stefan
  *
  */

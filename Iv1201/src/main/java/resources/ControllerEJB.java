@@ -26,7 +26,8 @@ import dto.RoleDTO;
 import dto.SearchCriteriaDTO;
 import exception.NoSuchCompetenceException;
 /**
- * The methods to be seen from managed been through dependency injection
+ * The Controller class in between the integration and view layer
+ * The EJB responseible for the transaction managment of the application
  *
  */
 @Stateless
@@ -39,11 +40,7 @@ public class ControllerEJB {
 	@Inject
 	private GeneralDAO dao;
 
-	//	public void addApplicant(ApplicantDTO dto){
-	//		dao.insertPerson(dto);
-	//		dao.insertAvailability(dto);
-	//		//Call etc etc...
-	//	}
+
 
 	/**
 	 * Add an applicant into the Database. An Applicant is a Person with associated data about its competence
@@ -67,12 +64,14 @@ public class ControllerEJB {
 	 * @return - List of CompetenceDTO which will be available
 	 */
 	public List<CompetenceDTO> getAllCompetences(){
-		return dao.getAllCompetences();
+		
+			return dao.getAllCompetences();	
+		
+		
 	}
 	
 	
-	//Diskutabelt om detta är för mycket kod för att vara i controller...?
-	//Men å andra sidan har vi änså länge bara en sådan bloated metod varför vi kanske kan låta vara sålänge.
+
 	/**
 	 * Get all applications available. Only permitted by user in an admin role
 	 * @return a List of all applications available

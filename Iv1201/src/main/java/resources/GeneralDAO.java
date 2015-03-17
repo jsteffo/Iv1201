@@ -34,7 +34,11 @@ import dto.PersonDTO;
 import dto.SearchCriteriaDTO;
 import exception.NoSuchCompetenceException;
 
-
+/**
+ * DAO class responsible for communication with persistent layer
+ * @author stefan
+ *
+ */
 @Stateless
 @Interceptors(LoggingInterceptor.class)
 public class GeneralDAO {
@@ -153,12 +157,18 @@ public class GeneralDAO {
 		return finalResultList;
 	}
 
-	//Eventuellt vill vi dela upp koden i mindre bitar... Men börjar med att bara skriva skiten
 
+	/**
+	 * Get all persons in the database.
+	 * @return List of Persons
+	 */
 	public List <Person> getAllPersons(){
 		return em.createNamedQuery("Person.findAll", Person.class).getResultList();
 	}
-
+	/**
+	 * Get all applicants in database.
+	 * @return List of Persons
+	 */
 	public List<Person> getAllApplicants(){
 		String sql = "Select p from Person p INNER JOIN p.role r where r.roleId= :param1";
 		return em.createQuery(sql, Person.class).setParameter("param1", applicant).getResultList();
@@ -168,8 +178,8 @@ public class GeneralDAO {
 	/**
 	 * Get all Persons that fulfills searchCriteria in SearchDTO
 	 * It's enough if one availability or competence of listed fullfills criteria
-	 * @param s
-	 * @return
+	 * @param s Searchcriteria to be used
+	 * @return List of Persons
 	 */
 	public List<Person> searchPersons(SearchCriteriaDTO s){
 		
@@ -226,33 +236,5 @@ public class GeneralDAO {
 	}
 
 
-	//	/**
-	//	 * Insert availability row into database. The availability specified is associated with the person specified in argument
-	//	 * @param dto - The dates to be inserted and social security number of person whom dates should be associated with
-	//	 */
-	//	public void insertAvailability(ApplicantDTO dto) {
-	//		Availability a = new Availability();
-	//		a.setFromDate(java.sql.Date.valueOf(dto.getFromDate()));
-	//		a.setToDate(java.sql.Date.valueOf(dto.getToDate()));
-	//		BigInteger personId = getPersonIdFromSsn(dto.getSsn());
-	//		a.setPersonId(personId);
-	//		em.persist(a);
-	//	}
-	//	/**
-	//	 * Looks up the primary key associated with specified social security number in database.
-	//	 * @param ssn - Social security number
-	//	 * @return primary key value in database
-	//	 */
-	//	public BigInteger getPersonIdFromSsn(String ssn){
-	//		String sql = "SELECT p FROM Person p where p.ssn = :personSsn";
-	//		Person p = (Person) em.createQuery(sql).setParameter("personSsn", ssn).getSingleResult();
-	//		return new BigInteger(p.getSsn());
-	//		
-	//	}
-
-	//insertRole
-	//	public void addRole(String str){
-	//		em.create...
-	//	}
 
 }

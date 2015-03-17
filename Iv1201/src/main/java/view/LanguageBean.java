@@ -11,7 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
- 
+/**
+ * Class responseible for internationalization of front end
+ * @author stefan
+ *
+ */
 @ManagedBean(name="language")
 @SessionScoped
 public class LanguageBean implements Serializable{

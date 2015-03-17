@@ -2,6 +2,11 @@ package dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Class used to transfer data related to Person entity
+ * @author stefan
+ *
+ */
 @XmlRootElement
 public class PersonDTO {
 
