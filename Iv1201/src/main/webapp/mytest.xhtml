@@ -2,33 +2,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 
 
 <head>
-    <title>Work here</title>
+<title>Work here</title>
 </head>
 
 <body>
-<h:form>
-<h:outputText value="Förnamn"></h:outputText>
-<h:inputText value="#{listApplicantBean.name}"></h:inputText>
-<h:outputText value="Last name"></h:outputText>
-<h:inputText value="#{listApplicantBean.surname}"></h:inputText>
-<h:outputText value="fromDate"></h:outputText>
-<h:inputText value="#{listApplicantBean.fromDate}"></h:inputText>
-<h:outputText value="toDate"></h:outputText>
-<h:inputText value="#{listApplicantBean.toDate}"></h:inputText>
-<h:outputText value="RegistrationDate"></h:outputText>
-<h:inputText value="#{listApplicantBean.registrationDate}"></h:inputText>
-<h:outputText value="competence"></h:outputText>
-<h:inputText value="#{listApplicantBean.competence}"></h:inputText>
+	<h:form>
+		<h:outputText value="Förnamn"></h:outputText>
+		<h:inputText value="#{listApplicantBean.name}"></h:inputText>
+		<h:outputText value="Last name"></h:outputText>
+		<h:inputText value="#{listApplicantBean.surname}"></h:inputText>
+		<h:outputText value="fromDate"></h:outputText>
+		<h:inputText value="#{listApplicantBean.fromDate}"></h:inputText>
+		<h:outputText value="toDate"></h:outputText>
+		<h:inputText value="#{listApplicantBean.toDate}"></h:inputText>
+		<h:outputText value="RegistrationDate"></h:outputText>
+		<h:inputText value="#{listApplicantBean.registrationDate}"></h:inputText>
+		<h:outputText value="competence"></h:outputText>
+		<h:inputText value="#{listApplicantBean.competence}"></h:inputText>
 
 
-<h:commandButton value="submit" action="#{listApplicantBean.search}"></h:commandButton>
-</h:form>
+		<h:commandButton value="submit" action="#{listApplicantBean.search}"></h:commandButton>
+
+	</h:form>
+
+
+	<table border="1">
+	<ui:repeat var="var"
+		value="#{listApplicantBean.completeApplicationList}">
+
+		<tr> 
+			<td> <h:outputText value="#{var.personDTO.firstName}"></h:outputText></td>
+		
+			<td> <h:outputText value="#{var.personDTO.lastName}" /></td>
+			<td><h:form>
+			<h:commandButton value="pdf"
+			action="#{listApplicantBean.pdf(var)}" />
+			</h:form></td>
+		</tr>
+	</ui:repeat>
+	</table>
+
 </body>
 </html>

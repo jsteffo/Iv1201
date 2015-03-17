@@ -1,16 +1,30 @@
 package view;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import model.Availability;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import resources.ControllerEJB;
+import dto.AvailabilityDTO;
+import dto.CompetenceDTO;
 import dto.CompleteApplicationDTO;
+import dto.PersonDTO;
 import dto.SearchCriteriaDTO;
 
 @ManagedBean(name="listApplicantBean")
@@ -29,9 +43,21 @@ public class ListApplicantBean {
 	private String name;
 	private String surname;
 	private String competence;
-
+	
+	private List<CompleteApplicationDTO> completeApplicationList = new ArrayList<>();
+	
+	
 	public String getCompetence() {
 		return competence;
+	}
+
+	public List<CompleteApplicationDTO> getCompleteApplicationList() {
+		return completeApplicationList;
+	}
+
+	public void setCompleteApplicationList(
+			List<CompleteApplicationDTO> completeApplicationList) {
+		this.completeApplicationList = completeApplicationList;
 	}
 
 	public void setCompetence(String competence) {
@@ -111,12 +137,71 @@ public class ListApplicantBean {
 		s.setSurname(surname);
 
 
-		List<CompleteApplicationDTO> complete = controller.searchApplications(s);
-		for(CompleteApplicationDTO c : complete ){
-			System.out.println(c.getPersonDTO().getFirstName());
-			System.out.println(c.getPersonDTO().getLastName());
-			System.out.println(c.getCompetenceDTO().get(0).getName());
-			System.out.println(c.getCompetenceDTO().get(0).getYearsOfExperience());
+		setCompleteApplicationList(controller.searchApplications(s));
+//		for(CompleteApplicationDTO c : complete ){
+//			System.out.println(c.getPersonDTO().getFirstName());
+//			System.out.println(c.getPersonDTO().getLastName());
+//			System.out.println(c.getCompetenceDTO().get(0).getName());
+//			System.out.println(c.getCompetenceDTO().get(0).getYearsOfExperience());
+//		}
+	}
+
+	 
+	public void pdf(CompleteApplicationDTO dto){
+		try{
+			FacesContext fc = FacesContext.getCurrentInstance();
+			ExternalContext ec = fc.getExternalContext();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			Document doc = new Document();
+			PdfWriter.getInstance(doc, baos);
+			doc.open();
+			
+
+			PersonDTO pDTO = dto.getPersonDTO();
+			String firstName = "name: " + pDTO.getFirstName();
+			String lastName = "lastname: " + pDTO.getLastName();
+			String email = "email:" + pDTO.getEmail();
+			String ssn = "ssn: " + pDTO.getSsn();
+			
+			
+			doc.add(new Paragraph(firstName));
+			doc.add(new Paragraph(lastName));
+			doc.add(new Paragraph(email));
+			doc.add(new Paragraph(ssn));
+			
+			List<AvailabilityDTO> aDTO = dto.getAvailabilityDTO();
+			doc.add(new Paragraph("Availability:"));
+			for(AvailabilityDTO a : aDTO) {
+				String from = "from: " + a.getFromDate();
+				String to  = "to : " + a.getToDate();
+				doc.add(new Paragraph(from));
+				doc.add(new Paragraph(to));
+			}
+			doc.add(new Paragraph("Competence:"));
+			List<CompetenceDTO> competenceDTO = dto.getCompetenceDTO();
+			for(CompetenceDTO c : competenceDTO){
+				String competence = c.getName() + ", " + c.getYearsOfExperience();
+				doc.add(new Paragraph(competence));
+			}
+			
+			
+			//doc.add(new Paragraph(text));
+			doc.close();
+			ec.setResponseHeader("Expires", "0");
+			ec.setResponseHeader("Cache-Control",
+					"must-revalidate, post-check=0, pre-check=0");
+			ec.setResponseHeader("Pragma", "public");
+			ec.setResponseContentType("application/pdf");
+			ec.setResponseContentLength(baos.size());
+			OutputStream os = ec.getResponseOutputStream();
+			baos.writeTo(os);
+
+			os.flush();
+			os.close();
+			fc.responseComplete();
+		} catch(Exception e){
+			e.printStackTrace();
 		}
 	}
+
 }

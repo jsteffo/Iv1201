@@ -1,5 +1,8 @@
 package dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class PersonDTO {
 
 	private String firstName;
