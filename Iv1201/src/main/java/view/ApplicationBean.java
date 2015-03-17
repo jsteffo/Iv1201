@@ -64,7 +64,12 @@ public class ApplicationBean {
 	private List<CompetenceDTO> existingCompetences = new ArrayList<CompetenceDTO>();
 	private List<String> dropdownCompetences = new ArrayList<String>();
 
+        private String availabilityMessage;
 
+        public String getAvailabilityMessage() {
+            return availabilityMessage;
+        }
+        
 	private void initAvailability(){
 
 		for (int i = 1; i < 13; i++) {
@@ -247,11 +252,62 @@ public class ApplicationBean {
 	public void clearCompetences(){
 		competenceList.clear();
 	}
-
-	//this probably will not work without regex validation and conversion!!!!! NOT TESTED
+        
+	//Will add availability to list and validate input.
 	public void addAvailability(){
 
 		AvailabilityDTO aDTO = new AvailabilityDTO();
+                String response = "";
+                
+                if ((fromDateMonth.equalsIgnoreCase("2")) && (Integer.parseInt(fromDateDay) > 28)) {
+                    availabilityMessage =" - Date format error: Feb only has 28 days.";
+                    
+                }
+                
+                if ((fromDateMonth.equalsIgnoreCase("4")) && (Integer.parseInt(fromDateDay) > 30)) {
+                    availabilityMessage =" - Date format error: Apr only has 30 days.";
+                    
+                }
+                
+                if ((fromDateMonth.equalsIgnoreCase("6")) && (Integer.parseInt(fromDateDay) > 30)) {
+                    availabilityMessage =" - Date format error: June only has 30 days.";
+                }
+                
+                if ((fromDateMonth.equalsIgnoreCase("9")) && (Integer.parseInt(fromDateDay) > 30)) {
+                    availabilityMessage =" - Date format error: Sep only has 30 days. ";
+                    
+                }
+                
+                if ((fromDateMonth.equalsIgnoreCase("11")) && (Integer.parseInt(fromDateDay) > 30)) {
+                    availabilityMessage =" - Date format error: Nov only has 30 days.";
+                    
+                }
+                if ((toDateMonth.equalsIgnoreCase("2")) && (Integer.parseInt(toDateDay) > 28)) {
+                    availabilityMessage =" - Date format error: Feb only has 30 days.";
+                    
+                }
+                
+                if ((toDateMonth.equalsIgnoreCase("4")) && (Integer.parseInt(toDateDay) > 30)) {
+                   availabilityMessage =" - Date format error: Apr only has 30 days.";
+                    
+                }
+                
+                if ((toDateMonth.equalsIgnoreCase("6")) && (Integer.parseInt(toDateDay) > 30)) {
+                    availabilityMessage =" - Date format error: June only has 30 days.";
+                    
+                }
+                
+                if ((fromDateMonth.equalsIgnoreCase("9")) && (Integer.parseInt(toDateDay) > 30)) {
+                 availabilityMessage =" - Date format error: Sep only has 30 days.";
+                    
+                }
+                
+                if ((toDateMonth.equalsIgnoreCase("11")) && (Integer.parseInt(toDateDay) > 30)) {
+                    availabilityMessage =" - Date format error: Nov only has 30 days.";
+                    
+                }
+                
+                
 		LocalDate from = LocalDate.of(Integer.parseInt(fromDateYear), Integer.parseInt(fromDateMonth), Integer.parseInt(fromDateDay));
 		LocalDate to = LocalDate.of(Integer.parseInt(toDateYear), Integer.parseInt(toDateMonth), Integer.parseInt(toDateDay));
 
@@ -259,7 +315,8 @@ public class ApplicationBean {
 		aDTO.setFromDate(from);
 		aDTO.setToDate(to);
 		availabilityList.add(aDTO);
-
+                availabilityMessage = "";
+                
 	}
 	//Will empty the list of available periods
 	public void clearAvailabilities(){
